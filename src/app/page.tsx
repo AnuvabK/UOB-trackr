@@ -1,3 +1,4 @@
+import StatCard from "@/components/layout/StatCard";
 import Image from "next/image";
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
               className="font-medium text-zinc-950 dark:text-zinc-50"
             >
               Templates
-            </a>{" "}
+            </a>{" "}``
             or the{" "}
             <a
               href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -58,6 +59,7 @@ export default function Home() {
           >
             Documentation
           </a>
+          <StatCard title={""} value={""} />
         </div>
       </main>
     </div>
