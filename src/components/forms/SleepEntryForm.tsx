@@ -1,6 +1,8 @@
+'use client' // using useState
+
 import React, { useState, useMemo } from "react";
 
-type SleepEntry = {
+export type SleepEntry = {
   date: string;
   bedtime: string;
   wakeTime: string;

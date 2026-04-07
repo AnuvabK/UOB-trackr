@@ -2,9 +2,6 @@ import Image from "next/image";
 import EntryCard from "@/components/layout/EntryCard";
 import StatCard from "@/components/layout/StatCard";
 
-import { db } from "@/db"
-import * as p from "drizzle-orm/pg-core"
-
 const sampleEntry = {
   date: "2026-04-04",
   bedtime: "2026-04-03T22:30:00Z",
@@ -12,42 +9,6 @@ const sampleEntry = {
   quality: 8,
   notes: "Feeling rested today!",
 };
-
-export const screen = p.pgTable("screen", {
-  uid: p.integer().primaryKey(),
-  date: p.date().notNull(),
-  hrs: p.integer().notNull(),
-  mins: p.integer().notNull(),
-  cat: p.text().notNull(),
-  app: p.text(),
-  notes: p.text()
-});
-
-async function insertScreenTimeEntry(
-  uid: number, date: Date, hrs: number, mins: number, cat: string, app?: string, notes?: string) {
-
-  console.log(app)
-  console.log(notes)
-  
-  await db.insert(screen).values({
-    uid: uid,
-    date: date,
-    hrs: hrs,
-    mins: mins,
-    cat: cat,
-    app: app,
-    notes: notes
-  })
-} 
-
-try {
-  await insertScreenTimeEntry(
-    1, new Date(2026, 4), 12, 40
-  );    
-}
-catch (error) {
-  console.log("The error is " + error)
-}
 
 export default function Home() {
   return (

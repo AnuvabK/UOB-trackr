@@ -1,3 +1,5 @@
+'use client' // using useState
+
 import React, { useState } from "react";
 
 export type StressEntry = {
