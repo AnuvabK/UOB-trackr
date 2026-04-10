@@ -1,3 +1,5 @@
+'use client' // using useState
+
 import React, { useState, useMemo } from "react";
 
 export type ScreenTimeCategory = "social" | "entertainment" | "productivity" | "education" | "other";

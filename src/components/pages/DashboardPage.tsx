@@ -1,3 +1,10 @@
+
+export default function Dashboard() {
+    return (
+        <div>
+        </div>
+    );
+} 
 import type { SleepEntry } from "@/lib/validators";
 import StatCard from "@/components/layout/StatCard";
 import EntryCard from "@/components/layout/EntryCard";
