@@ -13,10 +13,6 @@ export function RegisterForm({onSubmit, loading, error}: RegisterFormProps) {
     const [password, setPassword] = useState("");
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault();
-            onSubmit({ name, email, password });
-        }}>
     
         <div className="max-w-md mx-auto p-8 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl space-y-6 transition-all duration-300 hover:shadow-primary/5">
 
@@ -97,6 +93,5 @@ export function RegisterForm({onSubmit, loading, error}: RegisterFormProps) {
             </p>
             </form>
         </div>
-        </form>
     );
 }

@@ -1,20 +1,13 @@
 'use client';
+import { SleepEntry } from '@/lib/validators';
 import './Graphs.css';
 import React, { useState } from 'react';
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { multipleOf } from 'zod';
 
-interface SleepData {
-    id?: number;
-    userId?: number;
-    date: string;
-    bedtime: string;
-    waketime: string;
-    quality: number;
-    cycles?: string;
-}
 
-interface FormattedSleepData {
+
+interface FormattedSleepEntry {
     date: string;
     totalMins: number;
     light: number;
@@ -24,7 +17,7 @@ interface FormattedSleepData {
 }
 
 type SleepGraphProps = {
-    rawData?: SleepData[];
+    rawData?: SleepEntry[];
 };
 
 const SleepGraph = ({ rawData }: SleepGraphProps) => {
@@ -51,15 +44,16 @@ const SleepGraph = ({ rawData }: SleepGraphProps) => {
     }
   };
 
-    const addTime = (data: SleepData[], total: FormattedSleepData[], dataLength: number) => {
+    const addTime = (data: SleepEntry[], total: FormattedSleepEntry[], dataLength: number) => {
         for (let i = 0; i < dataLength; i++) {
-            const bedTime = data[i].bedtime.split(':');
-            const wakeTime = data[i].waketime.split(':');
-            let totalMins = 0;
+            const bedDate = new Date(data[i].bedtime)
+            const wakeDate = new Date(data[i].wakeTime)
+            let totalMins = (wakeDate.getTime()-bedDate.getTime() )/60000;;
+        
             const date = data[i].date;
             const month = parseInt(date.split('-')[1]);
 
-            if ((parseInt(wakeTime[0]) * 60 + parseInt(wakeTime[1])) - (parseInt(bedTime[0]) * 60 + parseInt(bedTime[1])) < 0) {
+            if ((parseInt([0]) * 60 + parseInt(wakeTime[1])) - (parseInt(bedTime[0]) * 60 + parseInt(bedTime[1])) < 0) {
                 let nightMins = 24 * 60 - (parseInt(bedTime[0]) * 60 + parseInt(bedTime[1]));
                 let morningMins = parseInt(wakeTime[0]) * 60 + parseInt(wakeTime[1]);
                 totalMins += nightMins;
@@ -88,7 +82,7 @@ const SleepGraph = ({ rawData }: SleepGraphProps) => {
 
     }
 
-    const formatData = (newData: SleepData[]) => {
+    const formatData = (newData: SleepEntry[]) => {
         const dataLength = data.length;
 
         if (selectedDate.length === 4) {
